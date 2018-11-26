@@ -19,7 +19,7 @@ passport.deserializeUser((userId, done) => { // this function will automatically
 passport.use(new GoogleStrategy({
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: 'http://localhost:5000/auth/google/callback',
+        callbackURL: '/auth/google/callback',
         proxy: true //since we are hosting the prod version on heroku, internally googlestrategy sees heroku as a proxy and do not trust proxies so it switch from https to http. setting the proxy file to true prevent the switch
     },
     function(accessToken, refreshToken, profile, done) {
