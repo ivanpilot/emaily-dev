@@ -1,6 +1,6 @@
-require('dotenv/config'); //we do not assign it to a variable because we just want to reference that file somewhere in our code so it is executed but we are not using any returned value from this file. This is why we just condense it to 'require...'
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const keys = require('../config/keys');
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
@@ -17,8 +17,8 @@ passport.deserializeUser((userId, done) => { // this function will automatically
 
 
 passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        clientID: keys.googleClientID,
+        clientSecret: keys.googleClientSecret,
         callbackURL: 'http://localhost:5000/auth/google/callback'
     },
     function(accessToken, refreshToken, profile, done) {

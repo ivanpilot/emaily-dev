@@ -1,4 +1,4 @@
-require('dotenv/config');
+const keys = require('./config/keys');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session'); //this is b/c express doen't know anything about cookie so we want to create and access cookies
@@ -8,14 +8,14 @@ require('./services/passport'); //the order here is important! inside passport w
 
 const authRoutes = require('./routes/authRoutes');
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 const app = express();
 
 app.use(
     cookieSession({
       maxAge: 30*24*60*60*1000, // duration life of a cookie in ms by default
-      keys: [process.env.COOKIE_KEY] // arbitrary key to encrypt the cookies
+      keys: [keys.cookieKey] // arbitrary key to encrypt the cookies
     })
 )
 app.use(passport.initialize()); // tell passport to initialize and use the cookies
