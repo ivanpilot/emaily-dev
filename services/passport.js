@@ -22,15 +22,25 @@ passport.use(new GoogleStrategy({
         callbackURL: '/auth/google/callback',
         proxy: true //since we are hosting the prod version on heroku, internally googlestrategy sees heroku as a proxy and do not trust proxies so it switch from https to http. setting the proxy file to true prevent the switch
     },
-    function(accessToken, refreshToken, profile, done) {
-        User.findOne({ googleId: profile.id})
-            .then((user) => {
-                if(!user) {
-                    new User({ googleId: profile.id})
-                        .save()
-                        .then((user) => done(null, user))
-                }
-                done(null, user)
-            })
+    async function(accessToken, refreshToken, profile, done) {
+        const existingUser = await User.findOne({ googleId: profile.id});
+
+        if(existingUser) {
+          return done(null, existingUser);
+        }
+
+        const user = await new User({ googleId: profile.id}).save();
+        done(null, user);
     }
+    // function(accessToken, refreshToken, profile, done) {
+    //     User.findOne({ googleId: profile.id})
+    //         .then((user) => {
+    //             if(!user) {
+    //                 new User({ googleId: profile.id})
+    //                     .save()
+    //                     .then((user) => done(null, user))
+    //             }
+    //             done(null, user)
+    //         })
+    // }
 ));
