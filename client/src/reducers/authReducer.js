@@ -1,7 +1,10 @@
-export default function(state = {}, action) {
-  console.log('ACTION IS: ', action)
-  switch (action.type) {
+import { FETCH_USER } from '../actions/types';
 
+export default function(state = null, action) {
+  console.log('response to be dispatched: ', action)
+  switch (action.type) {
+    case FETCH_USER:
+      return action.payload || false //if user is not loggedin the payload is '' string which is falsy so we want to return explicitly false in that case
     default:
       return state;
   }

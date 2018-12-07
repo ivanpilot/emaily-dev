@@ -18,13 +18,14 @@ module.exports = (app) => {
             { failureRedirect: '/login' }
         ),
         function(req, res) {
-            res.redirect('/');
+            res.redirect('/surveys');
         }
     );
 
     app.get('/api/logout', (req, res) => {
         req.logout(); // this is provided by passport. It kills the cookie.
-        res.send(req.user) // this is an otpional line of code which create a blank web page since req.user is null. just to make sure that the cookies has been deleted by passport
+        // res.send(req.user) // this is an otpional line of code which create a blank web page since req.user is null. just to make sure that the cookies has been deleted by passport
+        res.redirect('/');
       })
 
     app.get('/api/current_user', (req, res) => {
