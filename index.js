@@ -24,11 +24,6 @@ app.use(
 app.use(passport.initialize()); // tell passport to initialize and use the cookies
 app.use(passport.session()); // tell passport to initialize and use the cookies
 
-
-app.get('/', (req, res) => {
-    res.send({google: 'you are in!!'})
-})
-
 authRoutes(app);
 billingRoutes(app);
 
