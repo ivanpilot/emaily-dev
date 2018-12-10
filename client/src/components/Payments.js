@@ -10,8 +10,8 @@ class Payments extends React.Component {
                 name="Emaily" // this will appear on top of the stripe banking form
                 description="$5 for 5 email credits" // same as name
                 amount={500} //by default stripe goes with (i) USD currency and (ii) cents amount so 500 means 5 USD
-            token={token => this.props.handleToken(token)} //expect to receive a callback function that would be called after we have successfully retrieve an authorization token from the strip API.  NOTHING TO DO WITH THE API TOKEN LIKE PUBLIC OR SECRET KEY!!! 
-            stripeKey={process.env.REACT_APP_STRIPE_KEY}
+                token={token => this.props.handleToken(token)} //expect to receive a callback function that would be called after we have successfully retrieve an authorization token from the strip API.  NOTHING TO DO WITH THE API TOKEN LIKE PUBLIC OR SECRET KEY!!!
+                stripeKey={process.env.REACT_APP_STRIPE_KEY}
             >
                 <button
                     className="btn"
