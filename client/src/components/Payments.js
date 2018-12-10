@@ -5,6 +5,8 @@ import * as actions from '../actions';
 
 class Payments extends React.Component {
     render() {
+        console.log('PK is: ', process.env.REACT_APP_STRIPE_KEY)
+        console.log('PK is: ', process.env.STRIPE_PUBLISHABLE_KEY)
         return(
             <StripeCheckout 
                 name="Emaily" // this will appear on top of the stripe banking form
