@@ -24,5 +24,4 @@ yarn-error.log*
 
 *.swp
 
-.env.production
 .env.development
