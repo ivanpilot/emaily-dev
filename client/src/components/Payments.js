@@ -5,8 +5,9 @@ import * as actions from '../actions';
 
 class Payments extends React.Component {
     render() {
+      console.log(process.env.REACT_APP_STRIPE_KEY)
         return(
-            <StripeCheckout 
+            <StripeCheckout
                 name="Emaily" // this will appear on top of the stripe banking form
                 description="$5 for 5 email credits" // same as name
                 amount={500} //by default stripe goes with (i) USD currency and (ii) cents amount so 500 means 5 USD

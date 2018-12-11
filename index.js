@@ -5,10 +5,12 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session'); //this is b/c express doen't know anything about cookie so we want to create and access cookies
 const passport = require('passport'); // this is b/c passport do plenty of things aournd serialize and deserialize and attaching cookies to req object of http request. we want passport to include and use a cookie when sending data back to client
 require('./models/User');
+require('./models/Survey');
 require('./services/passport'); //the order here is important! inside passport we require the use of Users model so we need in the index.js file to require Users before passport
 
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
@@ -26,6 +28,7 @@ app.use(passport.session()); // tell passport to initialize and use the cookies
 
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 // so apparently when we are in production, it is a bit more tricky than in dev, we will to tell express which file and from where to serve them. typically, they are some routes which are supposed to be managed by express and other by react and this is what might create the confusion so it is recommended to tell express what to serve. I THINK IT IS WEIRD and it is ONLY DUE to the fact that we have embedded REACT INSIDE our SERVER code which explain why express has to know everything i.e. a user wants to go to a url, it goes straight to express and then express need to figure out if it serves the resource and which one or if it delegates to react. HAD we SEPARATED the front end from the back end, a user will always hit REACT. and React decides what to do next.
 //
